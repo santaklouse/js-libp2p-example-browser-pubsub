@@ -1,0 +1,4 @@
+[submodule "dist"]
+	path = dist
+	url = git@github.com:santaklouse/js-libp2p-example-browser-pubsub.git
+	branch = gh-pages

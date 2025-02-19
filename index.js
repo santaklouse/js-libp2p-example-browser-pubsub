@@ -10,6 +10,7 @@ import * as filters from '@libp2p/websockets/filters'
 import { multiaddr } from '@multiformats/multiaddr'
 import { createLibp2p } from 'libp2p'
 import { fromString, toString } from 'uint8arrays'
+import { createHelia } from 'helia'
 
 const DOM = {
   peerId: () => document.getElementById('peer-id'),
@@ -35,7 +36,7 @@ const appendOutput = (line) => {
 }
 const clean = (line) => line.replaceAll('\n', '')
 
-const libp2p = await createLibp2p({
+const node = createLibp2p({
   addresses: {
     listen: [
       // make a reservation on any discovered relays - this will let other
@@ -76,6 +77,10 @@ const libp2p = await createLibp2p({
     dcutr: dcutr()
   }
 })
+
+const helia = await createHelia({libp2p: node})
+
+const {libp2p} = helia;
 
 DOM.peerId().innerText = libp2p.peerId.toString()
 
